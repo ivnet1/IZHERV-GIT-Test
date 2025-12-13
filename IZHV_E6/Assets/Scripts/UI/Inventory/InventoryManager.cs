@@ -154,7 +154,12 @@ public class InventoryManager : MonoBehaviour
          * be called.
          */
         
-        
+        mItemCreateButton = itemDetails.Q<Button>("ItemDetailButtonCreate");
+
+        if (mItemCreateButton != null)
+        {
+            mItemCreateButton.clicked += () => CreateItem();
+        }   
         
         
         await UniTask.WaitForEndOfFrame();
@@ -389,9 +394,17 @@ public class InventoryManager : MonoBehaviour
         
         if (item == null)
         { // We have no item selected -> Provide some default information.
+            mItemDetailName.text = "No Item Selected";
+            mItemDetailDescription.text = "Select an item from the grid to see details.";
+            mItemDetailCost.text = "-";
+            mItemCreateButton.SetEnabled(false);
         }
         else
         { // We have item selected -> Use the item information.
+            mItemDetailName.text = item.definition.readableName;
+            mItemDetailDescription.text = item.definition.readableDescription;
+            mItemDetailCost.text = item.definition.cost.ToString();
+            mItemCreateButton.SetEnabled(availableCurrency >= item.definition.cost);
         }
         
         selectedItem = item;
@@ -426,7 +439,19 @@ public class InventoryManager : MonoBehaviour
          */
         
         var itemDefinition = selectedItem?.definition;
+         if (selectedItem == null || itemDefinition == null)
+        {
+            return false;
+        }
+
+        // 2. Kontrola: Máme dostatok peňazí?
+        if (availableCurrency < itemDefinition.cost)
+        {
+            return false;
+        }
+        availableCurrency -= itemDefinition.cost;
+        Instantiate(itemDefinition.prefab, createDestination.transform);
         
-        return false;
+        return true;
     }
 }

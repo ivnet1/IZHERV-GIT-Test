@@ -172,6 +172,43 @@ public class DebugMenuUI : MonoBehaviour
                 // Placing the elements next to each other.
                 GUILayout.BeginHorizontal();
                 {
+                    GUILayout.Label("Currency: ", GUILayout.Width(WINDOW_DIMENSION.x / 4.0f));
+                    var currency = InventoryManager.Instance.availableCurrency;
+                    currency = (int) GUILayout.HorizontalSlider(currency, 0.0f, 5000.0f, GUILayout.ExpandWidth(true));
+                    if (GUI.changed)
+                    { 
+                        InventoryManager.Instance.availableCurrency = currency; 
+                    }
+                }
+                GUILayout.EndHorizontal();
+                GUILayout.Space(10);
+
+
+                GameManager.Instance.interactiveMode = GUILayout.Toggle(
+                    GameManager.Instance.interactiveMode, 
+                    " Interactive Mode"
+                );
+                SoundManager.Instance.masterMuted = GUILayout.Toggle(
+                    SoundManager.Instance.masterMuted, 
+                    " Mute Sound"
+                );
+                GUILayout.BeginHorizontal();
+                {
+                    GUILayout.Label("Vol:", GUILayout.Width(30));
+                    
+                    float currentVol = SoundManager.Instance.masterVolume;
+                    currentVol = GUILayout.HorizontalSlider(currentVol, -80.0f, 20.0f);
+                    
+                    if (GUI.changed)
+                    {
+                        SoundManager.Instance.masterVolume = currentVol;
+                    }
+                }
+                GUILayout.EndHorizontal();
+                GUILayout.Space(10);
+
+                GUILayout.BeginHorizontal();
+                { 
                     for (var iii = 1; iii <= 10; ++iii)
                     { // Create a set of 10 sliders all sharing the same value.
                         mDummyValue = GUILayout.VerticalSlider(
@@ -196,7 +233,9 @@ public class DebugMenuUI : MonoBehaviour
                     if (GUILayout.Button("Enable\nDummy\nCharacter", 
                         GUILayout.ExpandWidth(true), 
                         GUILayout.ExpandHeight(true)))
-                    { /* Fill the code here! */ }
+                    { 
+                        GameManager.Instance.TogglePlayerCharacter();
+                    }
                 }
                 GUILayout.EndHorizontal();
                 // Do not forget to end each group in the correct order!
