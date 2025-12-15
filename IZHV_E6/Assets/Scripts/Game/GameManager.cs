@@ -174,7 +174,7 @@ public class GameManager : MonoBehaviour
     Application.OpenURL(Application.absoluteURL); 
 #else // !UNITY_WEBPLAYER
         // Quitting in all other builds:
-    Application.Quit() 
+    Application.Quit();
 #endif
     }
 }

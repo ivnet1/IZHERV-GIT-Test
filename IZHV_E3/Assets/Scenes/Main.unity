@@ -1753,7 +1753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1005452474
 Transform:
   m_ObjectHideFlags: 0
@@ -2095,9 +2095,9 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.20602608
+    x: 0.35325205
     y: 0
-    width: 0.58794785
+    width: 0.29349592
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -2240,6 +2240,11 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
+  playerColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!4 &1439073999
 Transform:
   m_ObjectHideFlags: 0
@@ -2271,7 +2276,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1509093167
 MonoBehaviour:
   m_ObjectHideFlags: 0
